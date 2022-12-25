@@ -1,0 +1,38 @@
+.form__fields {
+  display: grid;
+
+  @media (min-width: 790px) {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.form__fields-title {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.form__fields--left,
+.form__fields--right {
+  display: grid;
+  border: 1px solid rgb(118, 118, 118, 0.75);
+  border-radius: 5px;
+}
+
+.form__fields--left {
+  justify-items: center;
+  text-align: center;
+}
+
+input[type=number]::-webkit-outer-spin-button,
+input[type=number]::-webkit-inner-spin-button {
+  display: none;
+}
+
+.form__image {
+  object-fit: contain;
+}
+
+.form__button {
+  display: block;
+  margin: 20px auto;
+}

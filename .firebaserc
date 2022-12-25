@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "catalog-d02ee": {
+      "hosting": {
+        "catalog-app": [
+          "catalog-d02ee"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "catalog-d02ee"
+  }
+}

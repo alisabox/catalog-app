@@ -1,1 +1,21 @@
-<p>header works!</p>
+<mat-toolbar color="primary">
+  <nav class="nav">
+    <a routerLink="/catalog" class="nav_title" matTooltip="See catalog">Catalog</a>
+    <button
+      mat-icon-button
+      aria-label="Favorite products"
+      matTooltip="Favorite products"
+      routerLink="/favorite"
+    >
+      <mat-icon>favorite</mat-icon>
+    </button>
+    <button
+      mat-icon-button
+      aria-label="Add new product"
+      matTooltip="Add new product"
+      routerLink="/add-product"
+    >
+      <mat-icon>add_circle_outline</mat-icon>
+    </button>
+  </nav>
+</mat-toolbar>

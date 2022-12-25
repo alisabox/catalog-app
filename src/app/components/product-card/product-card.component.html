@@ -1,0 +1,36 @@
+<mat-card class="card" *ngIf="product">
+  <img
+    mat-card-image
+    class="card__image"
+    src="{{ product.image }}"
+    alt="{{ product.name }}"
+  >
+  <mat-card-header>
+    <mat-card-title>
+      <a [routerLink]="['/catalog', product.id]"
+        class="card__title"
+      >
+        {{ product.name }}
+      </a>
+    </mat-card-title>
+    <mat-card-subtitle>{{ product.subtitle }}</mat-card-subtitle>
+  </mat-card-header>
+  <div class="card__footer">
+    <mat-card-content
+      class="card__price"
+    >
+      {{ product.price }}$
+    </mat-card-content>
+    <mat-card-actions>
+      <button
+        mat-mini-fab
+        color="{{ product.favorite ? 'primary' : ''}}"
+        aria-label="Add to favorites"
+        matTooltip="Add to favorites"
+        (click)="setFavorite()"
+      >
+        <mat-icon>favorite</mat-icon>
+      </button>
+    </mat-card-actions>
+  </div>
+</mat-card>

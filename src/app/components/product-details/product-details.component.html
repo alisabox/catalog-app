@@ -1,0 +1,33 @@
+<h1><b>Product description</b></h1>
+<div class="details" *ngIf="product; else spinner">
+  <div class="details--left">
+    <img
+      src="{{ product.image }}"
+      class="details__image"
+      alt="{{ product.name }}"
+      width="340"
+      height="340"
+    >
+    <button
+        mat-mini-fab
+        class="details__favorite"
+        color="{{ product && product.favorite ? 'primary' : ''}}"
+        aria-label="Add to favorites"
+        matTooltip="Add to favorites"
+        (click)="setFavorite()"
+      >
+        <mat-icon>favorite</mat-icon>
+      </button>
+  </div>
+
+  <div class="details--right">
+    <h2 class="details__name">{{ product.name }}</h2>
+    <p class="details__subtitle">{{ product.subtitle }}</p>
+    <p class="details__description">{{ product.description }}</p>
+    <span class="details__price">Price: ${{ product.price }}</span>
+  </div>
+</div>
+
+<ng-template #spinner>
+  <mat-spinner class="spinner"></mat-spinner>
+</ng-template>

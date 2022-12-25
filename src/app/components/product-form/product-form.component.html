@@ -1,0 +1,77 @@
+<h1><b>Product form</b></h1>
+<form class="form" [formGroup]="productForm" (ngSubmit)="onSubmit()">
+
+  <div class="form__fields">
+    <fieldset class="form__fields--left" [disabled]="isSaving">
+      <legend class="form__fields-title">Product image</legend>
+
+      <!-- Product image -->
+      <img [src]="productImgChanged$ | async" class="form__image" alt="Product image" width="340" height="340">
+      <div (click)="uploadFile.click()">
+        <button mat-raised-button type="button">Choose Product Image</button>
+        <input #uploadFile (change)="upload($event)" type="file" name="image" accept="image/*" style="display:none">
+      </div>
+
+    </fieldset>
+  
+    <fieldset class="form__fields--right" [disabled]="isSaving">
+      <legend class="form__fields-title">Product details</legend>
+
+      <!-- Name -->
+      <mat-form-field appearance="outline">
+        <mat-label>Product name</mat-label>
+        <input matInput formControlName="name" required>
+        <mat-error *ngIf="name && name.invalid && (name.dirty || name.touched)">
+          <span *ngIf="name.errors?.['required']">Name is required.</span>
+          <span *ngIf="name.errors?.['nameExists']">Product with the name "{{ name.value }}" already exists.</span>
+        </mat-error>
+      </mat-form-field>
+    
+      <!-- Short description -->
+      <mat-form-field appearance="outline">
+        <mat-label>Short description</mat-label>
+        <input matInput formControlName="subtitle" required>
+        <mat-error *ngIf="subtitle && subtitle.invalid && (subtitle.dirty || subtitle.touched)">
+          <span *ngIf="subtitle.errors?.['required']">Short description is required.</span>
+          <span *ngIf="subtitle.errors?.['maxlength']">Short description should have less than 35 characters.</span>
+        </mat-error>
+      </mat-form-field>
+    
+      <!-- Description -->
+      <mat-form-field appearance="outline">
+        <mat-label>Description</mat-label>
+        <textarea matInput formControlName="description" required></textarea>
+        <mat-error *ngIf="description && description.invalid && (description.dirty || description.touched)">
+          <span *ngIf="description.errors?.['required']">Description is required.</span>
+          <span *ngIf="description.errors?.['minlength']">Description should have at least 20 characters.</span>
+        </mat-error>
+      </mat-form-field>
+    
+      <!-- Price -->
+      <mat-form-field appearance="outline">
+        <mat-label>Price</mat-label>
+        <input matInput type="number" formControlName="price">
+        <span matTextPrefix>$&nbsp;</span>
+        <mat-error *ngIf="price && price.invalid && (price.dirty || price.touched)">
+          <span *ngIf="price.errors?.['required']">Price is required.</span>
+          <span *ngIf="price.errors?.['min']">Price be greater than 0.</span>
+        </mat-error>
+      </mat-form-field>
+
+    </fieldset>
+  </div>
+
+  <button
+    *ngIf="!isSaving; else spinner"
+    class="form__button"
+    mat-raised-button
+    color="primary"
+    type="submit"
+    [disabled]="productForm.invalid || !uploadedFile"
+  >Submit</button>
+
+  <ng-template #spinner>
+    <mat-spinner class="spinner"></mat-spinner>
+  </ng-template>
+
+</form>

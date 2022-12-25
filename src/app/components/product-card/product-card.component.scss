@@ -1,0 +1,47 @@
+.card {
+  height: 334px;
+  margin: 0 auto;
+  padding: 10px;
+  display: grid;
+  grid-template-rows: 185px 1fr 1fr;
+
+  @media (min-width: 790px) {
+    height: 490px;
+    grid-template-rows: 340px 1fr 1fr;
+  }
+
+  @media (min-width: 1200px) {}
+}
+
+.card__title {
+  text-decoration: none;
+  color: inherit;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.card__image {
+  width: 100%;
+  height: 185px;
+  display: flex;
+  justify-self: center;
+  align-self: center;
+  object-fit: contain;
+  background-image: url('../../../assets/image_placeholder_white.svg');
+
+  @media (min-width: 790px) {
+    height: 340px;
+  }
+}
+
+.card__footer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.card__price {
+  font-weight: 700;
+  font-size: 19px;
+}

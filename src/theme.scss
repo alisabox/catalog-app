@@ -1,0 +1,107 @@
+@use '@angular/material' as mat;
+
+@include mat.core();
+
+/* For use in src/lib/core/theming/_palette.scss */
+$custom-palette: (
+    50 : #fbe6e7,
+    100 : #f5c0c4,
+    200 : #ef969c,
+    300 : #e86c74,
+    400 : #e34d57,
+    500 : #de2d39,
+    600 : #da2833,
+    700 : #d5222c,
+    800 : #d11c24,
+    900 : #c81117,
+    A100 : #fff6f7,
+    A200 : #ffc3c5,
+    A400 : #ff9093,
+    A700 : #ff777b,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #ffffff,
+        500 : #ffffff,
+        600 : #ffffff,
+        700 : #ffffff,
+        800 : #ffffff,
+        900 : #ffffff,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #000000,
+    )
+);
+
+$custom-accent-palette: (
+  50 : #e2f9ef,
+  100 : #b7f0d7,
+  200 : #88e7bc,
+  300 : #58dda1,
+  400 : #34d58c,
+  500 : #10ce78,
+  600 : #0ec970,
+  700 : #0cc265,
+  800 : #09bc5b,
+  900 : #05b048,
+  A100 : #dbffe7,
+  A200 : #a8ffc5,
+  A400 : #75ffa3,
+  A700 : #5bff92,
+  contrast: (
+    50 : #000000,
+    100 : #000000,
+    200 : #000000,
+    300 : #000000,
+    400 : #000000,
+    500 : #000000,
+    600 : #000000,
+    700 : #000000,
+    800 : #ffffff,
+    900 : #ffffff,
+    A100 : #000000,
+    A200 : #000000,
+    A400 : #000000,
+    A700 : #000000,
+  )
+);
+
+$grey-palette: (
+  50: #f7f9ff,
+  100: #f1f3fb,
+  200: #e8eaf2,
+  300: #d9dbe3,
+  400: #b5b7bf,
+  500: #96979f,
+  600: #6d6f76,
+  700: #5a5b62,
+  800: #3b3d43,
+  900: #1b1c22,
+  contrast: (
+    50 : #000000,
+    100 : #000000,
+    200 : #000000,
+    300 : #000000,
+    400 : #ffffff,
+    500 : #ffffff,
+    600 : #ffffff,
+    700 : #ffffff,
+    800 : #ffffff,
+    900 : #ffffff,
+  ),
+);
+
+$my-primary: mat.define-palette($custom-palette, 500);
+$my-accent: mat.define-palette($grey-palette, 100, 500);
+
+$my-theme: mat.define-light-theme((
+  color: (
+    primary: $my-primary,
+    accent: $my-accent,
+  )
+));
+
+@include mat.all-component-themes($my-theme);
