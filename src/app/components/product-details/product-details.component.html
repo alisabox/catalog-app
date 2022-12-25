@@ -12,8 +12,8 @@
         mat-mini-fab
         class="details__favorite"
         color="{{ product && product.favorite ? 'primary' : ''}}"
-        aria-label="Add to favorites"
-        matTooltip="Add to favorites"
+        attr.aria-label="{{ product.favorite ? 'Remove from favorites' : 'Add to favorites'}}"
+        matTooltip="{{ product.favorite ? 'Remove from favorites' : 'Add to favorites'}}"
         (click)="setFavorite()"
       >
         <mat-icon>favorite</mat-icon>

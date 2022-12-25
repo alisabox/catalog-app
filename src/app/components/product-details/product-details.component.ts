@@ -4,6 +4,7 @@ import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatButtonModule } from '@angular/material/button';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { FiresbaseService, Product } from 'src/app/services/firestore.service';
 import { ReactiveComponent } from 'src/app/shared/components/reactive.component';
 import { takeUntil } from 'rxjs';
@@ -18,6 +19,7 @@ import { takeUntil } from 'rxjs';
     MatButtonModule,
     MatIconModule,
     MatProgressSpinnerModule,
+    MatTooltipModule,
     ReactiveComponent,
     RouterModule,
   ],
