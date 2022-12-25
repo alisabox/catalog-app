@@ -1,7 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { takeUntil } from 'rxjs';
 import { FiresbaseService, Product } from 'src/app/services/firestore.service';
+import { ReactiveComponent } from 'src/app/shared/components/reactive.component';
 import { ProductCardComponent } from '../product-card/product-card.component';
 
 @Component({
@@ -13,9 +15,10 @@ import { ProductCardComponent } from '../product-card/product-card.component';
     CommonModule,
     RouterModule,
     ProductCardComponent,
+    ReactiveComponent,
   ],
 })
-export class FavoriteComponent implements OnInit {
+export class FavoriteComponent extends ReactiveComponent implements OnInit {
   private _products: Product[] = [];
 
   public get products(): Product[] {
@@ -24,10 +27,14 @@ export class FavoriteComponent implements OnInit {
 
   constructor(
     private readonly _bd: FiresbaseService,
-  ) { }
+  ) {
+    super();
+  }
 
   public ngOnInit(): void {
-    this._bd.getFavorite().subscribe((data) => {
+    this._bd.getFavorite().pipe(
+      takeUntil(this.destroy$),
+    ).subscribe((data) => {
       this._products = data;
     });
   }

@@ -1,6 +1,6 @@
 import { AbstractControl, AsyncValidatorFn } from "@angular/forms";
 import { map, tap } from "rxjs";
-import { FiresbaseService } from "../services/firestore.service";
+import { FiresbaseService } from "../../services/firestore.service";
 
 
 export function nameExistsAsyncValidator(firebase: FiresbaseService): AsyncValidatorFn {

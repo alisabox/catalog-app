@@ -6,9 +6,10 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { Router } from '@angular/router';
-import { BehaviorSubject, finalize, Observable, ReplaySubject, takeUntil } from 'rxjs';
+import { BehaviorSubject, finalize, Observable, takeUntil } from 'rxjs';
 import { FiresbaseService } from 'src/app/services/firestore.service';
-import { nameExistsAsyncValidator } from 'src/app/shared/nameExistsAsyncValidator';
+import { ReactiveComponent } from 'src/app/shared/components/reactive.component';
+import { nameExistsAsyncValidator } from 'src/app/shared/validators/nameExistsAsyncValidator';
 
 @Component({
   selector: 'app-product-form',
@@ -22,14 +23,14 @@ import { nameExistsAsyncValidator } from 'src/app/shared/nameExistsAsyncValidato
     MatInputModule,
     MatProgressSpinnerModule,
     ReactiveFormsModule,
+    ReactiveComponent,
   ],
 })
-export class ProductFormComponent implements OnDestroy {
+export class ProductFormComponent extends ReactiveComponent implements OnDestroy {
   private _isSaving: boolean = false;
   private _productImg: string = 'assets/image_placeholder.svg';
   private _productImgSubject$: BehaviorSubject<string> = new BehaviorSubject<string>(this._productImg);
   private _uploadedFile: File | null = null;
-  private _destroy$: ReplaySubject<boolean> = new ReplaySubject(1);
 
   public productImgChanged$: Observable<string> = this._productImgSubject$.asObservable();
 
@@ -67,11 +68,8 @@ export class ProductFormComponent implements OnDestroy {
   constructor(
     private readonly _db: FiresbaseService,
     private readonly _router: Router,
-  ) { }
-
-  public ngOnDestroy(): void {
-    this._destroy$.next(true);
-    this._destroy$.complete();
+  ) {
+    super();
   }
 
   public upload(uploadEvent: Event): void {
@@ -110,7 +108,7 @@ export class ProductFormComponent implements OnDestroy {
 
     this._db.post({ name, subtitle, price: parseFloat(price), description }, this._uploadedFile)
       .pipe(
-        takeUntil(this._destroy$),
+        takeUntil(this.destroy$),
         finalize(() => this._isSaving = false),
       ).subscribe((id: string) => {
         this._router.navigate(['catalog', id]);
